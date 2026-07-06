@@ -30,3 +30,16 @@ document.getElementById('filter-dogs').addEventListener('click', () => renderPet
 
 // Initial render
 renderPets();
+
+const themeBtn = document.getElementById('theme-toggle');
+
+themeBtn.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  
+  // Swap the text/icon based on the current mode
+  if (document.body.classList.contains('dark-mode')) {
+    themeBtn.textContent = '☀️ Light Mode';
+  } else {
+    themeBtn.textContent = '🌙 Dark Mode';
+  }
+});

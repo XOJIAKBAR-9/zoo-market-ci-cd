@@ -57,3 +57,14 @@ button:hover {
   object-fit: cover;
   border-radius: 5px;
 }
+
+body.dark-mode {
+  --bg-color: #121212;
+  --card-bg: #2d2d2d;
+  color: #ffffff;
+}
+
+body.dark-mode h1, 
+body.dark-mode h2 {
+  color: #ffffff;
+}
