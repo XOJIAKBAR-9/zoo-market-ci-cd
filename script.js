@@ -2,7 +2,8 @@ const pets = [
   { name: 'Luna', type: 'cat', img: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500' },
   { name: 'Max', type: 'dog', img: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=500' },
   { name: 'Oliver', type: 'cat', img: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=500' },
-  { name: 'Bella', type: 'dog', img: 'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=500' }
+  { name: 'Bella', type: 'dog', img: 'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=500' },
+  { name: 'Rio', type: 'bird', img: 'https://images.unsplash.com/photo-1552728089-571692b15873?w=500' } // <-- The new addition
 ];
 
 const grid = document.getElementById('pet-grid');
