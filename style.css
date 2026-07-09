@@ -68,3 +68,19 @@ body.dark-mode h1,
 body.dark-mode h2 {
   color: #ffffff;
 }
+
+.price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--primary-color); /* This makes it match your buttons! */
+  margin: 10px 0;
+  background: rgba(46, 125, 50, 0.1); /* Adds a subtle green background */
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 20px;
+}
+
+body.dark-mode .price {
+  background: rgba(255, 255, 255, 0.1);
+  color: #81C784; /* A lighter green that pops on dark backgrounds */
+}
