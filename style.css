@@ -84,3 +84,34 @@ body.dark-mode .price {
   background: rgba(255, 255, 255, 0.1);
   color: #81C784; /* A lighter green that pops on dark backgrounds */
 }
+
+.card {
+  cursor: pointer; 
+}
+
+.hidden {
+  display: none !important;
+}
+
+#pet-details {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#pet-details img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+#back-btn {
+  background-color: #555;
+  margin-bottom: 20px;
+}
