@@ -3,30 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zoo Store</title>
+  <title>Zoo Market</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Welcome to the Zoo Store 🐾</h1>
-    <nav>
-      <button id="filter-all" aria-label="Show all pets">All</button>
-      <button id="filter-cats" aria-label="Show only cats">Cats 🐈</button>
-      <button id="filter-dogs" aria-label="Show only dogs">Dogs 🐕</button>
-      <button id="theme-toggle" aria-label="Toggle dark mode">🌙 Dark Mode</button>
-    </nav>
+  <header class="top-bar">
+    <h1>Zoo Market 🐾</h1>
+    <div class="search-container">
+      <input type="text" placeholder="Search animals, merch, or tickets..." aria-label="Search">
+    </div>
   </header>
 
+  <nav class="category-tabs">
+    <button id="filter-all" class="active">All</button>
+    <button id="filter-tickets">Tickets 🎟️</button>
+    <button id="filter-adopt">Adoptions 🫂</button>
+    <button id="filter-merch">Zoo Merch 👕</button>
+    <button id="filter-feed">Feed 🥕</button>
+    <button id="theme-toggle">🌙</button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Welcome to the Wild!</h2>
+      <p>Support our conservation efforts by shopping our nature-inspired market.</p>
+    </div>
+  </section>
+
   <main>
+    <h3 class="section-title">Trending Now</h3>
+    
     <div class="grid" id="pet-grid">
       </div>
 
     <div id="pet-details" class="hidden">
-      <button id="back-btn">⬅ Back to Zoo</button>
-      <div id="details-content">
-        </div>
+      <button id="back-btn">⬅ Back to Market</button>
+      <div id="details-content"></div>
     </div>
   </main>
+
+  <footer>
+    <p>&copy; 2026 Zoo Market. All rights reserved.</p>
+  </footer>
+
+  <nav class="bottom-nav">
+    <a href="#" class="nav-item">🏠<br>Home</a>
+    <a href="#" class="nav-item">🔍<br>Explore</a>
+    <a href="#" class="nav-item">🛒<br>Cart</a>
+    <a href="#" class="nav-item">👤<br>Profile</a>
+  </nav>
 
   <script src="script.js"></script>
 </body>
