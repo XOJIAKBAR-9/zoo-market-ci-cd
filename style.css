@@ -1,117 +1,213 @@
 :root {
-  --primary-color: #2E7D32;
-  --bg-color: #F5F5F5;
+  /* Nature-Inspired Palette */
+  --forest-green: #2E7D32;
+  --forest-green-dark: #1B5E20;
+  --sandy-beige: #EAE0C8;
+  --soft-white: #F9F9F6;
+  --text-dark: #2C3E50;
+  
+  /* Layout Variables */
+  --spacing: 8px; /* 8px Grid Base */
+  --bg-color: var(--soft-white);
   --card-bg: #FFFFFF;
 }
 
 body {
   font-family: system-ui, -apple-system, sans-serif;
   background-color: var(--bg-color);
+  color: var(--text-dark);
   margin: 0;
-  padding: 20px;
+  /* Add padding to the bottom so the fixed nav doesn't hide content */
+  padding: 0 0 calc(var(--spacing) * 10) 0; 
   text-align: center;
 }
 
-header {
-  margin-bottom: 30px;
-}
-
-button {
-  background-color: var(--primary-color);
+/* --- TOP BAR & SEARCH --- */
+.top-bar {
+  background-color: var(--forest-green);
   color: white;
-  border: none;
-  padding: 10px 20px;
-  margin: 0 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
+  padding: calc(var(--spacing) * 2);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
 }
 
-button:hover {
-  opacity: 0.9;
+.top-bar h1 {
+  margin: 0 0 calc(var(--spacing) * 2) 0;
+  font-size: 1.5rem;
 }
+
+.search-container input {
+  width: 90%;
+  max-width: 400px;
+  padding: calc(var(--spacing) * 1.5);
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+/* --- CATEGORY TABS --- */
+.category-tabs {
+  display: flex;
+  overflow-x: auto;
+  gap: var(--spacing);
+  padding: calc(var(--spacing) * 2);
+  white-space: nowrap;
+  background-color: var(--sandy-beige);
+  margin-top: calc(var(--spacing) * -1); /* Pulls it slightly under the header */
+}
+
+/* Hide scrollbar for native app feel */
+.category-tabs::-webkit-scrollbar { display: none; }
+
+.category-tabs button {
+  background-color: white;
+  color: var(--forest-green-dark);
+  border: none;
+  padding: calc(var(--spacing)) calc(var(--spacing) * 2);
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.category-tabs button:hover, 
+.category-tabs button.active {
+  background-color: var(--forest-green);
+  color: white;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+  /* Using a placeholder nature image with a green overlay */
+  background: linear-gradient(rgba(46, 125, 50, 0.75), rgba(46, 125, 50, 0.75)), url('https://images.unsplash.com/photo-1544829728-e5cb9eedc20e?w=800') center/cover;
+  color: white;
+  padding: calc(var(--spacing) * 5) calc(var(--spacing) * 2);
+  border-radius: 16px;
+  margin: calc(var(--spacing) * 2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.hero h2 { margin: 0 0 calc(var(--spacing) * 1) 0; }
+.hero p { margin: 0; font-size: 1.1rem; line-height: 1.4; }
+
+/* --- GRID & CARDS --- */
+main { padding: calc(var(--spacing) * 2); }
+.section-title { text-align: left; padding-left: var(--spacing); color: var(--forest-green-dark); }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  /* Auto-shrinks columns for mobile, expands on desktop */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+  gap: calc(var(--spacing) * 2);
   max-width: 900px;
   margin: 0 auto;
 }
 
 .card {
   background: var(--card-bg);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  padding: calc(var(--spacing) * 1.5);
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+  cursor: pointer;
   transition: transform 0.2s;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-}
+.card:hover { transform: translateY(-4px); }
 
 .card img {
   width: 100%;
-  height: 200px;
+  height: 140px;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 12px;
 }
 
-body.dark-mode {
-  --bg-color: #121212;
-  --card-bg: #2d2d2d;
-  color: #ffffff;
-}
-
-body.dark-mode h1, 
-body.dark-mode h2 {
-  color: #ffffff;
-}
+.card h2 { font-size: 1.1rem; margin: var(--spacing) 0; }
 
 .price {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: bold;
-  color: var(--primary-color); /* This makes it match your buttons! */
-  margin: 10px 0;
-  background: rgba(46, 125, 50, 0.1); /* Adds a subtle green background */
+  color: var(--forest-green);
+  background: rgba(46, 125, 50, 0.1);
+  padding: 4px 12px;
+  border-radius: 12px;
   display: inline-block;
-  padding: 5px 15px;
-  border-radius: 20px;
+  margin: 0;
 }
 
-body.dark-mode .price {
-  background: rgba(255, 255, 255, 0.1);
-  color: #81C784; /* A lighter green that pops on dark backgrounds */
+/* --- FOOTER --- */
+footer {
+  background-color: var(--sandy-beige);
+  color: var(--forest-green-dark);
+  padding: calc(var(--spacing) * 4) calc(var(--spacing) * 2) calc(var(--spacing) * 8); /* Extra padding for bottom nav */
+  margin-top: calc(var(--spacing) * 4);
+  font-size: 0.9rem;
 }
 
-.card {
-  cursor: pointer; 
+/* --- MOBILE BOTTOM NAV --- */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  padding: calc(var(--spacing) * 1.5) 0;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  z-index: 1000;
 }
 
-.hidden {
-  display: none !important;
+.bottom-nav .nav-item {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.7;
 }
 
+.bottom-nav .nav-item:hover {
+  color: var(--forest-green);
+  opacity: 1;
+}
+
+/* --- DETAILS PAGE (SPA) --- */
 #pet-details {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: left;
   background: var(--card-bg);
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  padding: calc(var(--spacing) * 3);
+  border-radius: 16px;
+  text-align: left;
 }
 
 #pet-details img {
   width: 100%;
-  height: 350px;
+  height: 300px;
   object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  border-radius: 12px;
 }
 
 #back-btn {
-  background-color: #555;
+  background-color: var(--sandy-beige);
+  color: var(--forest-green-dark);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
   margin-bottom: 20px;
+  font-weight: bold;
 }
+
+/* Utilities */
+.hidden { display: none !important; }
+
+/* Dark Mode Overrides */
+body.dark-mode {
+  --bg-color: #121212;
+  --card-bg: #1E1E1E;
+  --text-dark: #FFFFFF;
+  --sandy-beige: #2C2C2C;
+}
+body.dark-mode .bottom-nav { background: #1E1E1E; }
+body.dark-mode .category-tabs button { background: #333; color: white; }
