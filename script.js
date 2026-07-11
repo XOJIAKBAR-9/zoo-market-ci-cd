@@ -3,7 +3,7 @@ const inventory = [
   { name: 'General Admission', type: 'tickets', price: 25, img: 'https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500', description: 'Day pass to explore all open zoo exhibits.' },
   { name: 'Elephant Adoption Kit', type: 'adopt', price: 100, img: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?w=500', description: 'Support our elephants. Includes a plush toy and certificate.' },
   { name: 'Classic Zoo T-Shirt', type: 'merch', price: 30, img: 'https://images.unsplash.com/photo-1529362266642-70b777a565f4?w=500', description: '100% cotton green tee with our vintage logo.' },
-  { name: 'Giraffe Feeding Exp.', type: 'feed', price: 15, img: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=500', description: 'Get a bundle of fresh carrots to feed the giraffes!' },
+  { name: 'The black dog.', type: 'feed', price: 15, img: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=500', description: 'Get a bundle of fresh carrots to feed the giraffes!' },
   { name: 'VIP Backstage Pass', type: 'tickets', price: 75, img: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=500', description: 'Guided behind-the-scenes tour of the habitats.' }
 ];
 
