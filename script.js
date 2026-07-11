@@ -1,10 +1,10 @@
-// 1. The Data (Now with descriptions)
-const pets = [
-  { name: 'Luna', type: 'cat', price: 250, img: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500', description: 'Luna is a very relaxed cat. She only eats premium chicken and loves sleeping in the sun. Very gentle with kids.' },
-  { name: 'Max', type: 'dog', price: 300, img: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=500', description: 'Max is full of energy! He needs a backyard to run in. He loves playing fetch and is fiercely loyal.' },
-  { name: 'Oliver', type: 'cat', price: 150, img: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=500', description: 'Oliver is a curious explorer. He will find his way onto the top of your fridge. Loves tuna.' },
-  { name: 'Bella', type: 'dog', price: 400, img: 'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=500', description: 'Bella is a sweet, calm companion. Great for apartments. She prefers short walks and lots of belly rubs.' },
-  { name: 'Rio', type: 'bird', price: 75, img: 'https://images.unsplash.com/photo-1552728089-571692b15873?w=500', description: 'Rio is a talkative bird! He can mimic your morning alarm and loves eating fresh fruit.' }
+// 1. The NEW Data (Matching your new categories)
+const inventory = [
+  { name: 'General Admission', type: 'tickets', price: 25, img: 'https://images.unsplash.com/photo-1564767655658-4d6adc1a115c?w=500', description: 'Day pass to explore all open zoo exhibits.' },
+  { name: 'Elephant Adoption Kit', type: 'adopt', price: 100, img: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?w=500', description: 'Support our elephants. Includes a plush toy and certificate.' },
+  { name: 'Classic Zoo T-Shirt', type: 'merch', price: 30, img: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500', description: '100% cotton green tee with our vintage logo.' },
+  { name: 'Giraffe Feeding Exp.', type: 'feed', price: 15, img: 'https://images.unsplash.com/photo-1543949806-2c9935e6aa78?w=500', description: 'Get a bundle of fresh carrots to feed the giraffes!' },
+  { name: 'VIP Backstage Pass', type: 'tickets', price: 75, img: 'https://images.unsplash.com/photo-1503919005314-30d93d07d823?w=500', description: 'Guided behind-the-scenes tour of the habitats.' }
 ];
 
 // DOM Elements
@@ -13,61 +13,93 @@ const detailsView = document.getElementById('pet-details');
 const detailsContent = document.getElementById('details-content');
 const backBtn = document.getElementById('back-btn');
 
+// Array of all filter buttons so we can easily swap the "active" style
+const filterBtns = [
+  document.getElementById('filter-all'),
+  document.getElementById('filter-tickets'),
+  document.getElementById('filter-adopt'),
+  document.getElementById('filter-merch'),
+  document.getElementById('filter-feed')
+];
+
 // 2. The Render Function
-function renderPets(filterType = 'all') {
+function renderItems(filterType = 'all') {
   grid.innerHTML = '';
-  const filtered = filterType === 'all' ? pets : pets.filter(p => p.type === filterType);
+  const filtered = filterType === 'all' ? inventory : inventory.filter(item => item.type === filterType);
   
-  filtered.forEach(pet => {
+  filtered.forEach(item => {
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-      <img src="${pet.img}" alt="${pet.name}" width="250" height="200" fetchpriority="high">
-      <h2>${pet.name}</h2>
-      <p class="price">$${pet.price}</p> 
+      <img src="${item.img}" alt="${item.name}" width="250" height="140" fetchpriority="high">
+      <h2>${item.name}</h2>
+      <p class="price">$${item.price}</p> 
     `;
     
-    // NEW: Listen for clicks on the card
-    card.addEventListener('click', () => showPetDetails(pet));
-    
+    card.addEventListener('click', () => showItemDetails(item));
     grid.appendChild(card);
   });
 }
 
-// 3. NEW: Show Details Function
-function showPetDetails(pet) {
-  // Hide the grid, show the details container
+// 3. Show Details Function (SPA Routing)
+function showItemDetails(item) {
   grid.classList.add('hidden');
+  document.querySelector('.section-title').classList.add('hidden'); // Hide the "Trending" title
   detailsView.classList.remove('hidden');
   
-  // Inject the specific pet's HTML
   detailsContent.innerHTML = `
-    <img src="${pet.img}" alt="${pet.name}">
-    <h2>${pet.name} the ${pet.type}</h2>
-    <p class="price">$${pet.price}</p>
-    <hr>
-    <p style="font-size: 1.2rem; line-height: 1.6;">${pet.description}</p>
+    <img src="${item.img}" alt="${item.name}">
+    <h2>${item.name}</h2>
+    <p class="price">$${item.price}</p>
+    <hr style="border: 1px solid var(--sandy-beige); margin: 20px 0;">
+    <p style="font-size: 1.1rem; line-height: 1.6;">${item.description}</p>
   `;
 }
 
-// 4. NEW: Back Button Listener
+// 4. Back Button Listener
 backBtn.addEventListener('click', () => {
-  // Hide the details, show the grid again
   detailsView.classList.add('hidden');
   grid.classList.remove('hidden');
+  document.querySelector('.section-title').classList.remove('hidden');
 });
 
-// 5. Filter Event Listeners
-document.getElementById('filter-all').addEventListener('click', () => renderPets('all'));
-document.getElementById('filter-cats').addEventListener('click', () => renderPets('cat'));
-document.getElementById('filter-dogs').addEventListener('click', () => renderPets('dog'));
+// 5. Helper Function to handle button highlighting
+function setActiveButton(clickedBtn) {
+  // Remove 'active' class from all buttons
+  filterBtns.forEach(btn => btn.classList.remove('active'));
+  // Add 'active' class to the one just clicked
+  clickedBtn.classList.add('active');
+}
 
-// 6. Dark Mode Event Listener
+// 6. NEW Filter Event Listeners matching your HTML IDs
+document.getElementById('filter-all').addEventListener('click', (e) => {
+  setActiveButton(e.target);
+  renderItems('all');
+});
+document.getElementById('filter-tickets').addEventListener('click', (e) => {
+  setActiveButton(e.target);
+  renderItems('tickets');
+});
+document.getElementById('filter-adopt').addEventListener('click', (e) => {
+  setActiveButton(e.target);
+  renderItems('adopt');
+});
+document.getElementById('filter-merch').addEventListener('click', (e) => {
+  setActiveButton(e.target);
+  renderItems('merch');
+});
+document.getElementById('filter-feed').addEventListener('click', (e) => {
+  setActiveButton(e.target);
+  renderItems('feed');
+});
+
+// 7. Dark Mode Logic
 const themeBtn = document.getElementById('theme-toggle');
 themeBtn.addEventListener('click', () => {
   document.body.classList.toggle('dark-mode');
-  themeBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
+  // Swap the moon/sun icon
+  themeBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
 });
 
 // Initial render
-renderPets();
+renderItems();
