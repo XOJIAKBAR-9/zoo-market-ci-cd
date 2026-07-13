@@ -43,63 +43,34 @@ function renderItems(filterType = 'all') {
 
 // 3. Show Details Function (SPA Routing)
 function showItemDetails(item) {
+  // Hide grid, hero, and tabs for a clean modal feel
   grid.classList.add('hidden');
-  document.querySelector('.section-title').classList.add('hidden'); // Hide the "Trending" title
+  document.querySelector('.section-title').classList.add('hidden'); 
+  document.querySelector('.hero').classList.add('hidden');
+  document.querySelector('.category-tabs').classList.add('hidden');
+  
   detailsView.classList.remove('hidden');
   
+  // Inject the premium layout
   detailsContent.innerHTML = `
     <img src="${item.img}" alt="${item.name}">
-    <h2>${item.name}</h2>
-    <p class="price">$${item.price}</p>
-    <hr style="border: 1px solid var(--sandy-beige); margin: 20px 0;">
-    <p style="font-size: 1.1rem; line-height: 1.6;">${item.description}</p>
+    <div class="details-header">
+      <h2>${item.name}</h2>
+      <span class="price">$${item.price}</span>
+    </div>
+    <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-light);">${item.description}</p>
+    
+    <button class="add-to-cart-btn" onclick="alert('${item.name} added to cart!')">
+      Add to Cart - $${item.price}
+    </button>
   `;
 }
 
-// 4. Back Button Listener
+// 4. Back Button Listener Update (to bring back the hero/tabs)
 backBtn.addEventListener('click', () => {
   detailsView.classList.add('hidden');
   grid.classList.remove('hidden');
   document.querySelector('.section-title').classList.remove('hidden');
+  document.querySelector('.hero').classList.remove('hidden');
+  document.querySelector('.category-tabs').classList.remove('hidden');
 });
-
-// 5. Helper Function to handle button highlighting
-function setActiveButton(clickedBtn) {
-  // Remove 'active' class from all buttons
-  filterBtns.forEach(btn => btn.classList.remove('active'));
-  // Add 'active' class to the one just clicked
-  clickedBtn.classList.add('active');
-}
-
-// 6. NEW Filter Event Listeners matching your HTML IDs
-document.getElementById('filter-all').addEventListener('click', (e) => {
-  setActiveButton(e.target);
-  renderItems('all');
-});
-document.getElementById('filter-tickets').addEventListener('click', (e) => {
-  setActiveButton(e.target);
-  renderItems('tickets');
-});
-document.getElementById('filter-adopt').addEventListener('click', (e) => {
-  setActiveButton(e.target);
-  renderItems('adopt');
-});
-document.getElementById('filter-merch').addEventListener('click', (e) => {
-  setActiveButton(e.target);
-  renderItems('merch');
-});
-document.getElementById('filter-feed').addEventListener('click', (e) => {
-  setActiveButton(e.target);
-  renderItems('feed');
-});
-
-// 7. Dark Mode Logic
-const themeBtn = document.getElementById('theme-toggle');
-themeBtn.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
-  // Swap the moon/sun icon
-  themeBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-});
-
-// Initial render
-renderItems();
