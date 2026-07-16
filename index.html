@@ -1,58 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zoo Market</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zoo Market</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="top-bar">
-    <h1>Zoo Market 🐾</h1>
-    <div class="search-container">
-      <input type="text" placeholder="Search animals, merch, or tickets..." aria-label="Search">
+<div class="aurora-bg" aria-hidden="true"></div>
+
+<header class="top-bar">
+  <div class="top-bar-row">
+    <h1>🐾 Zoo Market</h1>
+    <button id="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+  </div>
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Search animals, merch, or tickets..." aria-label="Search">
+  </div>
+</header>
+
+<nav class="category-tabs">
+  <button data-filter="all" class="active">All</button>
+  <button data-filter="tickets">Tickets 🎟️</button>
+  <button data-filter="adopt">Adoptions 🫂</button>
+  <button data-filter="merch">Zoo Merch 👕</button>
+  <button data-filter="feed">Feed 🥕</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-icon">🌿</div>
+  <h2>Welcome to the Wild</h2>
+  <p>Every ticket, adoption, and gift helps fund the care and future of our animals.</p>
+  <div class="hero-stats">
+    <div class="stat"><strong>120+</strong><span>Species</span></div>
+    <div class="stat"><strong>$2.4M</strong><span>Raised</span></div>
+    <div class="stat"><strong>8.5K</strong><span>Adopters</span></div>
+  </div>
+</section>
+
+<section class="featured-adopt" id="featured-adopt-section">
+  <h3 class="section-title">🫂 Featured Adoptions</h3>
+  <div class="featured-track" id="featured-track"></div>
+</section>
+
+<main>
+  <h3 class="section-title">Trending Now</h3>
+  <div class="grid" id="pet-grid"></div>
+
+  <div id="pet-details" class="hidden">
+    <button id="back-btn">⬅ Back to Market</button>
+    <div id="details-content"></div>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2026 Zoo Market. All rights reserved.</p>
+</footer>
+
+<div class="toast hidden" id="toast">
+  <span id="toast-message"></span>
+  <button class="toast-action" id="toast-action">View Cart</button>
+</div>
+
+<div class="cart-overlay hidden" id="cart-overlay"></div>
+<aside class="cart-drawer hidden" id="cart-drawer" aria-label="Shopping cart">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button class="cart-close" id="cart-close" aria-label="Close cart">✕</button>
+  </div>
+  <div class="cart-body" id="cart-body">
+    <div id="cart-items"></div>
+    <div id="order-confirm" class="order-confirm hidden">
+      <div class="check-icon">✓</div>
+      <h4>Order Confirmed!</h4>
+      <p>Thank you for supporting our animals and conservation efforts.</p>
+      <button class="continue-btn" id="continue-shopping">Continue Shopping</button>
     </div>
-  </header>
+  </div>
+  <div class="cart-footer hidden" id="cart-footer">
+    <div class="cart-subtotal-row"><span>Subtotal</span><span id="cart-subtotal">$0</span></div>
+    <button class="checkout-btn" id="checkout-btn">Checkout</button>
+  </div>
+</aside>
 
-  <nav class="category-tabs">
-    <button id="filter-all" class="active">All</button>
-    <button id="filter-tickets">Tickets 🎟️</button>
-    <button id="filter-adopt">Adoptions 🫂</button>
-    <button id="filter-merch">Zoo Merch 👕</button>
-    <button id="filter-feed">Feed 🥕</button>
-    <button id="theme-toggle">🌙</button>
-  </nav>
+<nav class="bottom-nav">
+  <a href="#" class="nav-item active" id="nav-home"><span class="nav-icon-wrap">🏠</span>Home</a>
+  <a href="#" class="nav-item" id="nav-explore"><span class="nav-icon-wrap">🔍</span>Explore</a>
+  <a href="#" class="nav-item" id="nav-cart"><span class="nav-icon-wrap">🛒<span class="cart-badge hidden" id="cart-badge">0</span></span>Cart</a>
+  <a href="#" class="nav-item" id="nav-profile"><span class="nav-icon-wrap">👤</span>Profile</a>
+</nav>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h2>Welcome to the Wild!</h2>
-      <p>Support our conservation efforts by shopping our nature-inspired market.</p>
-    </div>
-  </section>
-
-  <main>
-    <h3 class="section-title">Trending Now</h3>
-    
-    <div class="grid" id="pet-grid">
-      </div>
-
-    <div id="pet-details" class="hidden">
-      <button id="back-btn">⬅ Back to Market</button>
-      <div id="details-content"></div>
-    </div>
-  </main>
-
-  <footer>
-    <p>&copy; 2026 Zoo Market. All rights reserved.</p>
-  </footer>
-
-  <nav class="bottom-nav">
-    <a href="#" class="nav-item active"><span>🏠</span>Home</a>
-    <a href="#" class="nav-item"><span>🔍</span>Explore</a>
-    <a href="#" class="nav-item"><span>🛒</span>Cart</a>
-    <a href="#" class="nav-item"><span>👤</span>Profile</a>
-  </nav>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
