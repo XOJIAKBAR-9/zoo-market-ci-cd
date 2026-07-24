@@ -540,3 +540,26 @@ body.dark-mode {
   --text-dark: #f2f5f3;
   --text-light: #9db3ac;
 }
+
+/* ---------- Fly-to-cart ghost image ---------- */
+.flying-item {
+  position: fixed;
+  z-index: 2000;
+  pointer-events: none;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+  transition: all 0.55s cubic-bezier(0.19, 1, 0.22, 1);
+  opacity: 1;
+}
+
+/* Cart badge bounce when item lands */
+@keyframes cartBounce {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.45); }
+  70%  { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+.cart-badge.pop {
+  animation: cartBounce 0.45s ease;
+}

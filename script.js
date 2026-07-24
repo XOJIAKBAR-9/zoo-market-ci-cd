@@ -463,6 +463,9 @@ function addToCart(item, opts = {}) {
   }
 
   updateCartBadge();
+    const sourceImg = document.querySelector('.detail-img');
+    flyToCart(sourceImg);
+
   showToast(`${item.name} added to cart 🎉`);
 }
 
@@ -470,6 +473,42 @@ function updateCartBadge() {
   const count = cart.reduce((sum, l) => sum + l.qty, 0);
   cartBadge.textContent = count;
   cartBadge.classList.toggle('hidden', count === 0);
+}
+
+function flyToCart(sourceImg) {
+  const cartIconWrap = document.querySelector('#nav-cart .nav-icon-wrap');
+  if (!sourceImg || !cartIconWrap) return;
+
+  const startRect = sourceImg.getBoundingClientRect();
+  const endRect   = cartIconWrap.getBoundingClientRect();
+
+  const flyer = document.createElement('img');
+  flyer.src = sourceImg.src;
+  flyer.className = 'flying-item';
+  flyer.style.width  = Math.min(startRect.width, 120) + 'px';   // cap size
+  flyer.style.height = Math.min(startRect.height, 120) + 'px';
+  flyer.style.left   = startRect.left + 'px';
+  flyer.style.top    = startRect.top + 'px';
+
+  document.body.appendChild(flyer);
+
+  // Force layout so the browser registers the starting position
+  flyer.getBoundingClientRect();
+
+  requestAnimationFrame(() => {
+    const targetX = endRect.left + endRect.width / 2 - (Math.min(startRect.width, 120) / 2);
+    const targetY = endRect.top  + endRect.height / 2 - (Math.min(startRect.height, 120) / 2);
+    flyer.style.transform = `translate(${targetX - startRect.left}px, ${targetY - startRect.top}px) scale(0.12)`;
+    flyer.style.opacity   = '0';
+  });
+
+  setTimeout(() => {
+    flyer.remove();
+    // Trigger badge bounce
+    cartBadge.classList.remove('pop');
+    void cartBadge.offsetWidth; // force reflow
+    cartBadge.classList.add('pop');
+  }, 550);
 }
 
 function renderCart() {
